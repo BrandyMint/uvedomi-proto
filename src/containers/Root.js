@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 export default class Root extends React.Component {
   static propTypes = {
@@ -17,29 +19,16 @@ export default class Root extends React.Component {
     )
   }
 
-  get devTools () {
-    if (__DEBUG__) {
-      if (__DEBUG_NEW_WINDOW__) {
-        if (!window.devToolsExtension) {
-          require('../redux/utils/createDevToolsWindow').default(this.props.store)
-        } else {
-          window.devToolsExtension.open()
-        }
-      } else if (!window.devToolsExtension) {
-        const DevTools = require('containers/DevTools').default
-        return <DevTools />
-      }
-    }
-  }
-
   render () {
+    const muiTheme = getMuiTheme()
     return (
-      <Provider store={this.props.store}>
-        <div style={{ height: '100%' }}>
-          {this.content}
-          {this.devTools}
-        </div>
-      </Provider>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <Provider store={this.props.store}>
+          <div style={{ height: '100%' }}>
+            {this.content}
+          </div>
+        </Provider>
+      </MuiThemeProvider>
     )
   }
 }

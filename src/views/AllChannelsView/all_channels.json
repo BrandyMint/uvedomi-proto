@@ -1,0 +1,6 @@
+[
+  {"id": 1, "title": "Kiiiosk", "private": true},
+  {"id": 2, "title": "Taaasty", "private": false},
+  {"id": 3, "title": "Brian Goodwin", "private": true},
+  {"id": 4, "title": "Вася", "private": false}
+]
