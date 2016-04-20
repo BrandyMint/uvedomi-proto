@@ -20,6 +20,7 @@
     "test:dev": "npm run test -- --watch",
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
+    "deploy:gh": "better-npm-run deploy:gh",
     "deploy:prod": "better-npm-run deploy:prod",
     "flow:check": "babel-node bin/flow-check",
     "codecov": "cat coverage/*/lcov.info | codecov"
@@ -48,6 +49,13 @@
       "command": "npm run deploy",
       "env": {
         "NODE_ENV": "development",
+        "DEBUG": "app:*"
+      }
+    },
+    "deploy:gh": {
+      "command": "npm run deploy && git add --all ./dist && git commit -m 'dist' && git subtree split --prefix dist -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages && git reset --hard HEAD^",
+      "env": {
+        "NODE_ENV": "gh",
         "DEBUG": "app:*"
       }
     },

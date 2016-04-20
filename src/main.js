@@ -10,7 +10,7 @@ import configureStore from './redux/configureStore'
 
 // Configure history for react-router
 const browserHistory = useRouterHistory(createBrowserHistory)({
-  basename: __BASENAME__
+  basename: __DEBUG__ ? __BASENAME__ : '/uvedomi-proto'
 })
 
 // Create redux store and sync with react-router-redux. We have installed the
