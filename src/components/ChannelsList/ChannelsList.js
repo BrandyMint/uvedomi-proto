@@ -4,10 +4,7 @@ import { List, ListItem } from 'material-ui/List'
 import LockOpen from 'material-ui/svg-icons/action/lock-open'
 import Lock from 'material-ui/svg-icons/action/lock'
 
-type Props = {
-  list: array
-};
-export default class ChannelsList extends React.Component<void, Props, void> {
+export default class ChannelsList extends React.Component {
   static propTypes = {
     list: PropTypes.array.isRequired
   }
