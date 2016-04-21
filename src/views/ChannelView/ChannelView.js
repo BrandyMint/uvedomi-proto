@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import _ from 'lodash'
+import { find, includes } from 'lodash'
 import { goBack } from 'utils/navigation'
 
 import { List, ListItem } from 'material-ui/List'
@@ -37,7 +37,7 @@ export default class ChannelView extends React.Component {
   }
 
   findChannelById (id) {
-    return _.find(channels, { id: parseInt(id) })
+    return find(channels, { id: parseInt(id) })
   }
 
   successfullLoaded () {
@@ -47,7 +47,7 @@ export default class ChannelView extends React.Component {
   }
 
   subscribeButton (channel) {
-    return [3, 4].includes(channel.id) ? <IconButton><Close/></IconButton> : <IconButton><Check/></IconButton>
+    return includes([3, 4], channel.id) ? <IconButton><Close/></IconButton> : <IconButton><Check/></IconButton>
   }
 
   render () {
