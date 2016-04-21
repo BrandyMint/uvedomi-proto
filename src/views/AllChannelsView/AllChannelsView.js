@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
 import { gotoMyChannels } from 'utils/navigation'
 import ChannelsList from 'components/ChannelsList'
 
@@ -26,7 +25,11 @@ export default class AllChannelsView extends React.Component {
         <AppBar
           className='app-bar'
           title='Все каналы'
-          iconElementRight={<IconButton onTouchTap={gotoMyChannels(this.context.router)}><MyChannelsIcon /></IconButton>}
+          iconElementRight={
+            <IconButton onTouchTap={gotoMyChannels(this.context.router)}>
+              <MyChannelsIcon />
+            </IconButton>
+          }
         />
         <ChannelsList list={this.props.list} />
       </div>

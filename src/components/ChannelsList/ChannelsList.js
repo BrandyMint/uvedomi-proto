@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
 import { gotoChannel } from 'utils/navigation'
 import { List, ListItem } from 'material-ui/List'
 import LockOpen from 'material-ui/svg-icons/action/lock-open'
@@ -18,7 +17,9 @@ export default class ChannelsList extends React.Component {
   }
 
   newMessagesCount (item) {
-    return item.new_messages_count > 0 ? <div className='channel-item-new-messages-text'>{item.new_messages_count} новых сообщений</div> : ''
+    if (item.new_messages_count > 0) {
+      return <div className='channel-item-new-messages-text'>{item.new_messages_count} новых сообщений</div>
+    }
   }
 
   render () {
