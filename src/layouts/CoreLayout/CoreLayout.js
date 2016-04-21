@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import AppBar from 'material-ui/AppBar'
 import 'styles/core.scss'
 
 // Note: Stateless/function components *will not* hot reload!

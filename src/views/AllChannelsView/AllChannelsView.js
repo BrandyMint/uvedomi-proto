@@ -1,12 +1,18 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
+import { gotoMyChannels } from 'utils/navigation'
 import ChannelsList from 'components/ChannelsList'
-import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
+
+import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import MyChannelsIcon from 'material-ui/svg-icons/av/playlist-add-check'
+
 import all_channels from './all_channels.json'
 
 export default class AllChannelsView extends React.Component {
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
   static propTypes = {
     list: PropTypes.array.isRequired
   };
@@ -17,17 +23,11 @@ export default class AllChannelsView extends React.Component {
   render () {
     return (
       <div>
-        <Toolbar firstChild>
-          <ToolbarGroup>
-            <ToolbarTitle text='Все каналы' />
-          </ToolbarGroup>
-          <ToolbarGroup>
-            <Link to='/my'>
-              <IconButton className='my-channels-icon'><MyChannelsIcon /></IconButton>
-            </Link>
-          </ToolbarGroup>
-        </Toolbar>
-
+        <AppBar
+          className='app-bar'
+          title='Все каналы'
+          iconElementRight={<IconButton onTouchTap={gotoMyChannels(this.context.router)}><MyChannelsIcon /></IconButton>}
+        />
         <ChannelsList list={this.props.list} />
       </div>
     )

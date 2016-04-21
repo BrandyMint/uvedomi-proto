@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import ChannelsList from 'components/ChannelsList'
 import { goBack } from 'utils/navigation'
 
-import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
+import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 
@@ -19,13 +19,11 @@ export default class UserChannelsView extends React.Component {
   render () {
     return (
       <div>
-        <Toolbar>
-          <ToolbarGroup>
-            <IconButton onTouchTap={goBack} className='back-arrow'><ArrowBack /></IconButton>
-            <ToolbarTitle text='Мои каналы' />
-          </ToolbarGroup>
-        </Toolbar>
-
+        <AppBar
+          className='app-bar'
+          title='Мои каналы'
+          iconElementLeft={<IconButton onTouchTap={goBack}><ArrowBack /></IconButton>}
+        />
         <ChannelsList list={this.props.list} />
       </div>
     )

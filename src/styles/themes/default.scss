@@ -1,9 +1,15 @@
-.back-arrow {
-  margin: 3px 0 0 -12px;
+$layoutMaxWidth: 360px;
+
+.page-container {
+  max-width: $layoutMaxWidth;
+  height: 640px;
+  margin: 0 auto;
 }
-.my-channels-icon {
-  margin: 3px 0 0 12px;
+.view-container {
+  padding-top: 64px
 }
-.subscribed-icon {
-  margin: 14px 0 0 -12px;
+.app-bar {
+  position: fixed !important;
+  max-width: $layoutMaxWidth;
+  top: 0
 }

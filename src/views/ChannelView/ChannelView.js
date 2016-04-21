@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { goBack } from 'utils/navigation'
 
 import { List, ListItem } from 'material-ui/List'
-import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
+import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import Check from 'material-ui/svg-icons/navigation/check'
@@ -47,21 +47,18 @@ export default class ChannelView extends React.Component {
   }
 
   subscribeButton (channel) {
-    return [3, 4].includes(channel.id) ? <Close className='subscribed-icon' /> : <Check className='subscribed-icon' />
+    return [3, 4].includes(channel.id) ? <IconButton><Close/></IconButton> : <IconButton><Check/></IconButton>
   }
 
   render () {
     return (
       <div>
-        <Toolbar>
-          <ToolbarGroup>
-            <IconButton onTouchTap={goBack} className='back-arrow'><ArrowBack /></IconButton>
-            <ToolbarTitle text={this.state.channel.title} />
-          </ToolbarGroup>
-          <ToolbarGroup>
-            {this.subscribeButton(this.state.channel)}
-          </ToolbarGroup>
-        </Toolbar>
+        <AppBar
+          className='app-bar'
+          title={this.state.channel.title}
+          iconElementLeft={<IconButton onTouchTap={goBack}><ArrowBack /></IconButton>}
+          iconElementRight={this.subscribeButton(this.state.channel)}
+        />
         {(() => {
           if (this.state.loading) {
             return <CenteredRefreshIndicator />
