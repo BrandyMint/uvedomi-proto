@@ -1,6 +1,6 @@
 [
   {"id": 1, "title": "Kiiiosk", "private": true},
-  {"id": 2, "title": "Taaasty", "private": false},
+  {"id": 2, "title": "Taaasty", "private": false, "new_messages_count": 10},
   {"id": 3, "title": "Brian Goodwin", "private": true},
   {"id": 4, "title": "Milica Slobodanka Vasilija", "private": false},
   {"id": 5, "title": "Izaro Zuriñe Ederne", "private": false},

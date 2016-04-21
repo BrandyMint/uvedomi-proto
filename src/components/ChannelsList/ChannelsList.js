@@ -17,6 +17,10 @@ export default class ChannelsList extends React.Component {
     return priv ? <Lock /> : <LockOpen />
   }
 
+  newMessagesCount (item) {
+    return item.new_messages_count > 0 ? <div className='channel-item-new-messages-text'>{item.new_messages_count} новых сообщений</div> : ''
+  }
+
   render () {
     return (
       <List>
@@ -25,6 +29,7 @@ export default class ChannelsList extends React.Component {
             key={item.id}
             onTouchTap={gotoChannel(this.context.router, item.id)}
             primaryText={item.title}
+            secondaryText={this.newMessagesCount(item)}
             leftIcon={this.privacyIcon(item.private)}
           />
         )}
