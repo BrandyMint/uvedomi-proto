@@ -55,7 +55,7 @@ export default class ChannelView extends React.Component {
       <div>
         <Toolbar>
           <ToolbarGroup>
-            <IconButton onClick={goBack} className='back-arrow'><ArrowBack /></IconButton>
+            <IconButton onTouchTap={goBack} className='back-arrow'><ArrowBack /></IconButton>
             <ToolbarTitle text={this.state.channel.title} />
           </ToolbarGroup>
           <ToolbarGroup>
