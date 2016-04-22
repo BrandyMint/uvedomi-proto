@@ -6,15 +6,16 @@ import { List, ListItem } from 'material-ui/List'
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
-import Check from 'material-ui/svg-icons/navigation/check'
-import Close from 'material-ui/svg-icons/navigation/close'
+import Bell from 'material-ui/svg-icons/social/notifications-none'
+import BellActive from 'material-ui/svg-icons/social/notifications-active'
 import CenteredRefreshIndicator from 'components/CenteredRefreshIndicator'
 
 import messages from './messages.json'
-import channels from '../AllChannelsView/all_channels.json'
 
 export default class ChannelView extends React.Component {
   static propTypes = {
+    channels_list: PropTypes.array.isRequired,
+    subscriptions: PropTypes.array.isRequired,
     params: PropTypes.shape({
       channelId: PropTypes.string.isRequired
     })
@@ -37,7 +38,7 @@ export default class ChannelView extends React.Component {
   }
 
   findChannelById (id) {
-    return find(channels, { id: parseInt(id) })
+    return find(this.props.channels_list, { id: parseInt(id) })
   }
 
   successfullLoaded () {
@@ -47,7 +48,11 @@ export default class ChannelView extends React.Component {
   }
 
   subscribeButton (channel) {
-    return includes([3, 4], channel.id) ? <IconButton><Close/></IconButton> : <IconButton><Check/></IconButton>
+    if (includes(this.props.subscriptions, channel.id)) {
+      return <Bell/>
+    } else {
+      return <BellActive/>
+    }
   }
 
   render () {
@@ -57,7 +62,7 @@ export default class ChannelView extends React.Component {
           className='app-bar'
           title={this.state.channel.title}
           iconElementLeft={<IconButton onTouchTap={goBack}><ArrowBack /></IconButton>}
-          iconElementRight={this.subscribeButton(this.state.channel)}
+          iconElementRight={<IconButton>{this.subscribeButton(this.state.channel)}</IconButton>}
         />
         {(() => {
           if (this.state.loading) {

@@ -1,7 +1,8 @@
-$layoutMaxWidth: 360px;
+$screen-min: 361px;
+$screen-max: ($screen-min - 1);
 
 .page-container {
-  max-width: $layoutMaxWidth;
+  max-width: $screen-max;
   height: 640px;
   margin: 0 auto;
 }
@@ -10,8 +11,8 @@ $layoutMaxWidth: 360px;
 }
 .app-bar {
   position: fixed !important;
-  max-width: $layoutMaxWidth;
-  top: 0
+  max-width: $screen-max;
+  top: 0;
 }
 .channel-item-new-messages-text {
   color: rgb(255, 64, 129) !important;

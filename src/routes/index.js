@@ -7,9 +7,9 @@ import { Route, IndexRoute } from 'react-router'
 // very easy to navigate to files regardless of how deeply nested
 // your current file is.
 import CoreLayout from 'layouts/CoreLayout/CoreLayout'
-import AllChannelsView from 'views/AllChannelsView/AllChannelsView'
-import UserChannelsView from 'views/UserChannelsView/UserChannelsView'
-import ChannelView from 'views/ChannelView/ChannelView'
+import AllChannelsView from 'views/AllChannelsView'
+import UserChannelsView from 'views/UserChannelsView'
+import ChannelView from 'views/ChannelView'
 
 export default (store) => (
   <Route path='/' component={CoreLayout} >

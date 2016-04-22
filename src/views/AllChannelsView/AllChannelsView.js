@@ -1,23 +1,19 @@
 import React, { PropTypes } from 'react'
 import { gotoMyChannels } from 'utils/navigation'
-import ChannelsList from 'components/ChannelsList'
+import ChannelsList from 'components/ChannelsList/ChannelsList'
 
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import MyChannelsIcon from 'material-ui/svg-icons/av/playlist-add-check'
-
-import all_channels from './all_channels.json'
 
 export default class AllChannelsView extends React.Component {
   static contextTypes = {
     router: PropTypes.object.isRequired
   };
   static propTypes = {
-    list: PropTypes.array.isRequired
-  };
-  static defaultProps = {
-    list: all_channels
-  };
+    channels_list: PropTypes.array.isRequired,
+    subscriptions: PropTypes.array.isRequired
+  }
 
   render () {
     return (
@@ -31,7 +27,9 @@ export default class AllChannelsView extends React.Component {
             </IconButton>
           }
         />
-        <ChannelsList list={this.props.list} />
+        <ChannelsList
+          channels_list={this.props.channels_list}
+          subscriptions={this.props.subscriptions} />
       </div>
     )
   }

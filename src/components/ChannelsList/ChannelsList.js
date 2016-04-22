@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react'
+import { includes } from 'lodash'
 import { gotoChannel } from 'utils/navigation'
 import { List, ListItem } from 'material-ui/List'
 import LockOpen from 'material-ui/svg-icons/action/lock-open'
+import Bell from 'material-ui/svg-icons/social/notifications-none'
+import BellActive from 'material-ui/svg-icons/social/notifications-active'
 import Lock from 'material-ui/svg-icons/action/lock'
 
 export default class ChannelsList extends React.Component {
@@ -9,11 +12,20 @@ export default class ChannelsList extends React.Component {
     router: PropTypes.object.isRequired
   };
   static propTypes = {
-    list: PropTypes.array.isRequired
+    channels_list: PropTypes.array.isRequired,
+    subscriptions: PropTypes.array.isRequired
   }
 
   privacyIcon (priv) {
     return priv ? <Lock /> : <LockOpen />
+  }
+
+  subscribedIcon (item) {
+    return this.subscribed(item) ? <BellActive /> : <Bell />
+  }
+
+  subscribed (item) {
+    return includes(this.props.subscriptions, item.id)
   }
 
   newMessagesCount (item) {
@@ -25,13 +37,14 @@ export default class ChannelsList extends React.Component {
   render () {
     return (
       <List>
-        {this.props.list.map((item) =>
+        {this.props.channels_list.map((item) =>
           <ListItem
             key={item.id}
             onTouchTap={gotoChannel(this.context.router, item.id)}
             primaryText={item.title}
             secondaryText={this.newMessagesCount(item)}
             leftIcon={this.privacyIcon(item.private)}
+            rightIcon={this.subscribedIcon(item)}
           />
         )}
       </List>

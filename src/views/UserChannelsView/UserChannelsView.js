@@ -1,19 +1,20 @@
 import React, { PropTypes } from 'react'
-import ChannelsList from 'components/ChannelsList'
+import { filter, includes } from 'lodash'
+import ChannelsList from 'components/ChannelsList/ChannelsList'
 import { goBack } from 'utils/navigation'
 
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 
-import my_channels from './my_channels.json'
-
 export default class UserChannelsView extends React.Component {
   static propTypes = {
-    list: PropTypes.array.isRequired
-  };
-  static defaultProps = {
-    list: my_channels
+    channels_list: PropTypes.array.isRequired,
+    subscriptions: PropTypes.array.isRequired
+  }
+
+  my_channels () {
+    return filter(this.props.channels_list, (c) => includes(this.props.subscriptions, c.id))
   }
 
   render () {
@@ -24,7 +25,9 @@ export default class UserChannelsView extends React.Component {
           title='Мои каналы'
           iconElementLeft={<IconButton onTouchTap={goBack}><ArrowBack /></IconButton>}
         />
-        <ChannelsList list={this.props.list} />
+        <ChannelsList
+          channels_list={this.my_channels()}
+          subscriptions={this.props.subscriptions} />
       </div>
     )
   }
