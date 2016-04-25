@@ -62,5 +62,5 @@ export default {
       ]
     }
   ],
-  subscriptions: [1,2,4]
+  subscriptions: [1, 2, 4]
 }

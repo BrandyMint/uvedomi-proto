@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react'
-import { includes } from 'lodash'
+import { includes, isNil } from 'lodash'
 import { gotoChannel } from 'utils/navigation'
 import { List, ListItem } from 'material-ui/List'
 import LockOpen from 'material-ui/svg-icons/action/lock-open'
-import Bell from 'material-ui/svg-icons/social/notifications-none'
-import BellActive from 'material-ui/svg-icons/social/notifications-active'
 import Lock from 'material-ui/svg-icons/action/lock'
+import SubscriptionSwitch from 'components/SubscriptionSwitch'
 
 export default class ChannelsList extends React.Component {
   static contextTypes = {
@@ -13,7 +12,8 @@ export default class ChannelsList extends React.Component {
   };
   static propTypes = {
     channels_list: PropTypes.array.isRequired,
-    subscriptions: PropTypes.array.isRequired
+    subscriptions: PropTypes.array.isRequired,
+    subscribeAction: PropTypes.func
   }
 
   privacyIcon (priv) {
@@ -21,7 +21,11 @@ export default class ChannelsList extends React.Component {
   }
 
   subscribedIcon (item) {
-    return this.subscribed(item) ? <BellActive /> : <Bell />
+    if (isNil(this.props.subscribeAction)) return
+    return <SubscriptionSwitch
+      channelId={item.id}
+      subscribeAction={this.props.subscribeAction}
+      subscribed={this.subscribed(item)} />
   }
 
   subscribed (item) {

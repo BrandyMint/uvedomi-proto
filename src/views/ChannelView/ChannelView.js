@@ -6,9 +6,8 @@ import { List, ListItem } from 'material-ui/List'
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
-import Bell from 'material-ui/svg-icons/social/notifications-none'
-import BellActive from 'material-ui/svg-icons/social/notifications-active'
 import CenteredRefreshIndicator from 'components/CenteredRefreshIndicator'
+import SubscriptionSwitch from 'components/SubscriptionSwitch'
 
 import messages from './messages.json'
 
@@ -16,6 +15,7 @@ export default class ChannelView extends React.Component {
   static propTypes = {
     channels_list: PropTypes.array.isRequired,
     subscriptions: PropTypes.array.isRequired,
+    subscribeAction: PropTypes.func.isRequired,
     params: PropTypes.shape({
       channelId: PropTypes.string.isRequired
     })
@@ -47,12 +47,16 @@ export default class ChannelView extends React.Component {
     })
   }
 
-  subscribeButton (channel) {
-    if (includes(this.props.subscriptions, channel.id)) {
-      return <Bell/>
-    } else {
-      return <BellActive/>
-    }
+  subscribedIcon (channel) {
+    return <SubscriptionSwitch
+      channelId={channel.id}
+      subscribed={this.subscribed(channel)}
+      subscribeAction={this.props.subscribeAction}
+      wrap={true} />
+  }
+
+  subscribed (channel) {
+    return includes(this.props.subscriptions, channel.id)
   }
 
   render () {
@@ -62,7 +66,7 @@ export default class ChannelView extends React.Component {
           className='app-bar'
           title={this.state.channel.title}
           iconElementLeft={<IconButton onTouchTap={goBack}><ArrowBack /></IconButton>}
-          iconElementRight={<IconButton>{this.subscribeButton(this.state.channel)}</IconButton>}
+          iconElementRight={this.subscribedIcon(this.state.channel)}
         />
         {(() => {
           if (this.state.loading) {

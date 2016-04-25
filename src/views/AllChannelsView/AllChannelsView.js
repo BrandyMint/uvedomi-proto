@@ -12,7 +12,8 @@ export default class AllChannelsView extends React.Component {
   };
   static propTypes = {
     channels_list: PropTypes.array.isRequired,
-    subscriptions: PropTypes.array.isRequired
+    subscriptions: PropTypes.array.isRequired,
+    subscribeAction: PropTypes.func
   }
 
   render () {
@@ -29,7 +30,8 @@ export default class AllChannelsView extends React.Component {
         />
         <ChannelsList
           channels_list={this.props.channels_list}
-          subscriptions={this.props.subscriptions} />
+          subscriptions={this.props.subscriptions}
+          subscribeAction={this.props.subscribeAction} />
       </div>
     )
   }
