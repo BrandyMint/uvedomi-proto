@@ -24,18 +24,12 @@ export default class ChannelsList extends React.Component {
     if (isNil(this.props.subscribeAction)) return
     return <SubscriptionSwitch
       channelId={item.id}
-      subscribeAction={this.props.subscribeAction}
-      subscribed={this.subscribed(item)} />
+      subscribed={this.subscribed(item)}
+      subscribeAction={this.props.subscribeAction} />
   }
 
   subscribed (item) {
     return includes(this.props.subscriptions, item.id)
-  }
-
-  newMessagesCount (item) {
-    if (item.new_messages_count > 0) {
-      return <div className='channel-item-new-messages-text'>{item.new_messages_count} новых сообщений</div>
-    }
   }
 
   render () {
@@ -46,7 +40,6 @@ export default class ChannelsList extends React.Component {
             key={item.id}
             onTouchTap={gotoChannel(this.context.router, item.id)}
             primaryText={item.title}
-            secondaryText={this.newMessagesCount(item)}
             leftIcon={this.privacyIcon(item.private)}
             rightIcon={this.subscribedIcon(item)}
           />

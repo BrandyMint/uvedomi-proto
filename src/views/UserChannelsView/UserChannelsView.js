@@ -13,21 +13,28 @@ export default class UserChannelsView extends React.Component {
     subscriptions: PropTypes.array.isRequired
   }
 
-  my_channels () {
+  filter_channels () {
     return filter(this.props.channels_list, (c) => includes(this.props.subscriptions, c.id))
+  }
+
+  channels_list () {
+    if (this.props.subscriptions.length > 0) {
+      return <ChannelsList
+        channels_list={this.filter_channels()}
+        subscriptions={this.props.subscriptions} />
+    } else {
+      return <div className='u-NoContent'>Здесь пока ничего нет.</div>
+    }
   }
 
   render () {
     return (
       <div>
         <AppBar
-          className='app-bar'
+          className='AppBar'
           title='Мои каналы'
-          iconElementLeft={<IconButton onTouchTap={goBack}><ArrowBack /></IconButton>}
-        />
-        <ChannelsList
-          channels_list={this.my_channels()}
-          subscriptions={this.props.subscriptions} />
+          iconElementLeft={<IconButton onTouchTap={goBack}><ArrowBack /></IconButton>} />
+        {this.channels_list()}
       </div>
     )
   }

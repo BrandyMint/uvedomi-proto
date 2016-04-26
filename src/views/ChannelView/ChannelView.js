@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { find, includes } from 'lodash'
+import { get, find, includes } from 'lodash'
 import { goBack } from 'utils/navigation'
 
 import { List, ListItem } from 'material-ui/List'
@@ -9,12 +9,11 @@ import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import CenteredRefreshIndicator from 'components/CenteredRefreshIndicator'
 import SubscriptionSwitch from 'components/SubscriptionSwitch'
 
-import messages from './messages.json'
-
 export default class ChannelView extends React.Component {
   static propTypes = {
     channels_list: PropTypes.array.isRequired,
     subscriptions: PropTypes.array.isRequired,
+    messages: PropTypes.array.isRequired,
     subscribeAction: PropTypes.func.isRequired,
     params: PropTypes.shape({
       channelId: PropTypes.string.isRequired
@@ -59,30 +58,44 @@ export default class ChannelView extends React.Component {
     return includes(this.props.subscriptions, channel.id)
   }
 
+  messages () {
+    return get(find(this.props.messages, (obj) => { return obj.channel.id === this.state.channel.id }), 'list') || []
+  }
+
+  content () {
+    if (this.state.loading) {
+      return <CenteredRefreshIndicator />
+    } else {
+      return this.messagesList(this.messages())
+    }
+  }
+
+  messagesList (messages) {
+    if (messages.length > 0) {
+      return <List>
+        {messages.map((item) =>
+          <ListItem
+            key={item.id}
+            primaryText={item.text}
+            secondaryText={item.created_at}
+          />
+        )}
+      </List>
+    } else {
+      return <div className='u-NoContent'>Здесь пока ничего нет.</div>
+    }
+  }
+
   render () {
     return (
       <div>
         <AppBar
-          className='app-bar'
+          className='AppBar'
           title={this.state.channel.title}
           iconElementLeft={<IconButton onTouchTap={goBack}><ArrowBack /></IconButton>}
           iconElementRight={this.subscribedIcon(this.state.channel)}
         />
-        {(() => {
-          if (this.state.loading) {
-            return <CenteredRefreshIndicator />
-          } else {
-            return <List>
-              {messages.map((item) =>
-                <ListItem
-                  key={item.id}
-                  primaryText={item.text}
-                  secondaryText={item.created_at}
-                />
-              )}
-            </List>
-          }
-        })()}
+        {this.content()}
       </div>
     )
   }

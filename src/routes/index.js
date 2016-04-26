@@ -6,7 +6,7 @@ import { Route, IndexRoute } from 'react-router'
 // they were from the root of the ~/src directory. This makes it
 // very easy to navigate to files regardless of how deeply nested
 // your current file is.
-import CoreLayout from 'layouts/CoreLayout/CoreLayout'
+import CoreLayout from 'layouts/CoreLayout'
 import AllChannelsView from 'views/AllChannelsView'
 import UserChannelsView from 'views/UserChannelsView'
 import ChannelView from 'views/ChannelView'

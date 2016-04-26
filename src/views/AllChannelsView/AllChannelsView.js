@@ -13,20 +13,22 @@ export default class AllChannelsView extends React.Component {
   static propTypes = {
     channels_list: PropTypes.array.isRequired,
     subscriptions: PropTypes.array.isRequired,
-    subscribeAction: PropTypes.func
+    subscribeAction: PropTypes.func.isRequired
+  }
+
+  listIcon () {
+    return <IconButton onTouchTap={gotoMyChannels(this.context.router)}>
+      <MyChannelsIcon />
+    </IconButton>
   }
 
   render () {
     return (
       <div>
         <AppBar
-          className='app-bar'
+          className='AppBar'
           title='Все каналы'
-          iconElementRight={
-            <IconButton onTouchTap={gotoMyChannels(this.context.router)}>
-              <MyChannelsIcon />
-            </IconButton>
-          }
+          iconElementRight={this.listIcon()}
         />
         <ChannelsList
           channels_list={this.props.channels_list}

@@ -9,11 +9,14 @@ $screen-max: ($screen-min - 1);
 .view-container {
   padding-top: 64px
 }
-.app-bar {
+.AppBar {
   position: fixed !important;
   max-width: $screen-max;
   top: 0;
 }
-.channel-item-new-messages-text {
-  color: rgb(255, 64, 129) !important;
+.u-NoContent {
+  margin: 20px 0;
+  text-align: center;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.870588);
 }
