@@ -14,6 +14,17 @@ $screen-max: ($screen-min - 1);
   max-width: $screen-max;
   top: 0;
 }
+.ChannelsAutocomplete-container {
+  padding-top: 89px;
+}
+.ChannelsAutocomplete-input {
+  position: fixed!important;
+  max-width: $screen-max;
+  width: 100%;
+  top: 64px;
+  background: #fff;
+  z-index: 1;
+}
 .u-NoContent {
   margin: 20px 0;
   text-align: center;
