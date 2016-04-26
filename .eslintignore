@@ -1,6 +1,7 @@
 blueprints/**/files/**
 coverage/**
 node_modules/**
+src/actions/initialState.js
 dist/**
 *.spec.js
 src/index.html

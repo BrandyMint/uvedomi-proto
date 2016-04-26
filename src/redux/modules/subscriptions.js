@@ -16,10 +16,20 @@ export function subscribe (payload) {
 
 function handleSubscribe (state, action) {
   if (action.payload.doSubscribe) {
-    return uniq(concat(state, action.payload.channelId))
+    return subscribeChannel(state, action.payload)
   } else {
-    return filter(state, (id) => { return id !== action.payload.channelId })
+    return unsubscribeChannel(state, action.payload)
   }
+}
+
+function subscribeChannel (state, payload) {
+  // TODO: request
+  return uniq(concat(state, payload.channelId))
+}
+
+function unsubscribeChannel (state, payload) {
+  // TODO: request
+  return filter(state, (id) => { return id !== payload.channelId })
 }
 
 // Reducer

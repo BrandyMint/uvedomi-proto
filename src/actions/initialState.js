@@ -1,3 +1,5 @@
+import { SUCCESS_SHOW_CHANNEL } from 'redux/modules/password_dialog'
+
 export default {
   application: {
     mode: 'channels' // messages
@@ -72,6 +74,14 @@ export default {
         {id: 12, created_at: '20.04.2016 10:30', text: 'Привет! На 18 апреля 2016 в 07:30 за сутки новых магазинов 7. Добавлено товаров 49. Создано корзин 59. Оформлено заказов 19 из них успешно завершено 3 на 186 280.00 ₽ руб. (15%).'}
       ]
     }
+  ],
+  password_dialog: {
+    channel_id: 1,
+    open: false,
+    success: SUCCESS_SHOW_CHANNEL // SUCCESS_SUBSCRIBE
+  },
+  passwords: [
+    {id: 1, password: '123'}
   ],
   subscriptions: [1, 2, 4]
 }

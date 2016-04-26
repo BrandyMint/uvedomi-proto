@@ -14,13 +14,22 @@ export default class AllChannelsView extends React.Component {
   static propTypes = {
     channels_list: PropTypes.array.isRequired,
     subscriptions: PropTypes.array.isRequired,
-    subscribeAction: PropTypes.func.isRequired
+    passwords: PropTypes.array.isRequired,
+    password_dialog: PropTypes.object.isRequired,
+    subscribeAction: PropTypes.func.isRequired,
+    savePasswordAction: PropTypes.func.isRequired,
+    passwordDialogOpenAction: PropTypes.func.isRequired,
+    passwordDialogCloseAction: PropTypes.func.isRequired
   }
 
   listIcon () {
     return <IconButton onTouchTap={gotoMyChannels(this.context.router)}>
       <MyChannelsIcon />
     </IconButton>
+  }
+
+  subscribe () {
+
   }
 
   render () {
@@ -36,7 +45,14 @@ export default class AllChannelsView extends React.Component {
         <ChannelsList
           channels_list={this.props.channels_list}
           subscriptions={this.props.subscriptions}
-          subscribeAction={this.props.subscribeAction} />
+          passwords={this.props.passwords}
+          password_dialog={this.props.password_dialog}
+          subscribeAction={this.props.subscribeAction}
+
+          savePasswordAction={this.props.savePasswordAction}
+          passwordDialogOpenAction={this.props.passwordDialogOpenAction}
+          passwordDialogCloseAction={this.props.passwordDialogCloseAction}
+        />
       </div>
     )
   }
